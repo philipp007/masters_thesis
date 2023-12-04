@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<precice-configuration>
+  <log>
+    <sink
+      filter="%Severity% > debug"
+      format="---[precice] %ColorizedSeverity% %Message%"
+      enabled="true" />
+  </log>
+
+  <solver-interface dimensions="2">
+    <data:scalar name="heat" />
+
+    <mesh name="electrostatics-Mesh">
+      <use-data name="heat" />
+    </mesh>
+
+    <mesh name="thermal-Mesh">
+      <use-data name="heat" />
+    </mesh>
+
+    <participant name="electrostatics">
+      <use-mesh name="electrostatics-Mesh" provide="yes" />
+      <write-data name="heat" mesh="electrostatics-Mesh" />
+    </participant>
+
+    <participant name="thermal">
+      <use-mesh name="electrostatics-Mesh" from="electrostatics" />
+      <use-mesh name="thermal-Mesh" provide="yes" />
+      <mapping:nearest-neighbor
+        direction="read"
+        from="electrostatics-Mesh"
+        to="thermal-Mesh"
+        constraint="consistent" />
+      <read-data name="heat" mesh="thermal-Mesh" /> 
+    </participant>
+
+    <m2n:sockets from="electrostatics" to="thermal" exchange-directory=".." />
+
+    <coupling-scheme:serial-explicit>
+      <participants first="electrostatics" second="thermal" />
+      <time-window-size value="10" />
+      <max-time value="450" />
+      <exchange data="heat" mesh="electrostatics-Mesh" from="electrostatics" to="thermal" />
+    </coupling-scheme:serial-explicit>
+  </solver-interface>
+</precice-configuration>
