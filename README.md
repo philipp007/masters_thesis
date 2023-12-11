@@ -1,6 +1,8 @@
 Masters thesis project 'Modelling and coupled simulation of a thermal and electrochemical system' by Philipp Kretz as part of the program 'Computational Science and Engineering' at TUM. 
 
 This repository contains all software written in cooperation with the company Knorr-Bremse AG and as part of one of their projects. 
+Please contact me in case of questions: philipp.kretz@tum.de
+
 
 Required software: 
 - Ubuntu 22.04 or newer
