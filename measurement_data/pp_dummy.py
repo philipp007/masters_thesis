@@ -307,8 +307,10 @@ battery.from_csv(csv)
 battery.plot_me()
 
 [battery_charge_cycles, battery_discharge_cycles] = battery.find_cycles() 
-battery_charge_cycles.plot_me()
-battery_discharge_cycles.plot_me()
+for elem in battery_charge_cycles:
+    elem.plot_me()
+for elem in battery_discharge_cycles:
+    elem.plot_me()
 
 [battery_charge_cap, battery_discharge_cap] = capacity_investigation(battery_charge_cycles, battery_discharge_cycles)
 
