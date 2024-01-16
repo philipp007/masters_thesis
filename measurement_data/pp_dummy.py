@@ -319,7 +319,7 @@ for elem in battery_discharge_cycles:
 
 battery_SOC_data = []
 for elem in range(1):
-    tmp = SOC_data(battery_charge_cycles[elem], battery_discharge_cycles[elem])
+    tmp = SOC_data(battery_charge_cycles[elem], battery_discharge_cap)
     battery_SOC_data.append(tmp)
 
 ### end main ###
